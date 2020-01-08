@@ -9,4 +9,5 @@ public class SpringBootFullStackBasicAuthLoginLogoutApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(SpringBootFullStackBasicAuthLoginLogoutApplication.class, args);
 	}
+
 }
