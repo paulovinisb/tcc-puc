@@ -5,6 +5,7 @@ import com.tcc.puc.model.Interessado;
 import com.tcc.puc.repository.AreaRepository;
 import com.tcc.puc.repository.InteressadoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
@@ -23,6 +24,7 @@ public class InteressadoController {
     private AreaRepository areaRepository;
 
     @GetMapping("/areas/{areaId}/interessados")
+    @Cacheable("interessados")
     public List<Interessado> getInteressadosByAreaId(@PathVariable Long areaId) {
         return interessadoRepository.findByAreaAreaId(areaId);
     }

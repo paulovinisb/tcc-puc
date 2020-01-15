@@ -6,6 +6,7 @@ import com.tcc.puc.model.Sensor;
 import com.tcc.puc.repository.AreaRepository;
 import com.tcc.puc.repository.SensorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
@@ -24,6 +25,7 @@ public class SensorController {
     private AreaRepository areaRepository;
 
     @GetMapping("/areas/{areaId}/sensors")
+    @Cacheable("sensors")
     public List<Sensor> getSensors(@PathVariable Long areaId) {
         return sensorRepository.findByAreaAreaId(areaId);
     }

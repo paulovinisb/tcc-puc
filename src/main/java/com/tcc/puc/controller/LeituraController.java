@@ -5,6 +5,7 @@ import com.tcc.puc.model.Leitura;
 import com.tcc.puc.repository.LeituraRepository;
 import com.tcc.puc.repository.SensorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
@@ -23,6 +24,7 @@ public class LeituraController {
     private SensorRepository sensorRepository;
 
     @GetMapping("/areas/{areaId}/sensors/{sensorId}/leituras")
+    @Cacheable("leituras")
     public List<Leitura> getLeituras(@PathVariable Long areaId, @PathVariable Long sensorId) {
         return leituraRepository.findBySensorSensorId(sensorId);
     }

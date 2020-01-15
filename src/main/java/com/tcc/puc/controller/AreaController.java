@@ -4,6 +4,7 @@ import com.tcc.puc.exception.ResourceNotFoundException;
 import com.tcc.puc.model.Area;
 import com.tcc.puc.repository.AreaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
@@ -18,6 +19,7 @@ public class AreaController {
     private AreaRepository areaRepository;
 
     @GetMapping("/areas")
+    @Cacheable("areas")
     public Page<Area> getAreas(Pageable pageable) {
         return areaRepository.findAll(pageable);
     }

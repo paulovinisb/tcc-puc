@@ -4,6 +4,7 @@ import com.tcc.puc.exception.ResourceNotFoundException;
 import com.tcc.puc.model.Usuario;
 import com.tcc.puc.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
@@ -18,6 +19,7 @@ public class UsuarioController {
     private UsuarioRepository usuarioRepository;
 
     @GetMapping("/usuarios")
+    @Cacheable("usuarios")
     public Page<Usuario> getUsuarios(Pageable pageable) {
         return usuarioRepository.findAll(pageable);
     }
