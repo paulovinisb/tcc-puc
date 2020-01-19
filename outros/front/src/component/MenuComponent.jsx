@@ -10,13 +10,16 @@ class MenuComponent extends Component {
         return (
             <header>
                 <nav className="navbar navbar-expand-md navbar-dark bg-dark">
-                    <div><a href="http://www.admin.com" className="navbar-brand">admin</a></div>
+                    <div><a href="/" className="navbar-brand">Principal</a></div>
                     <ul className="navbar-nav">
-                        <li><Link className="nav-link" to="/courses">Courses</Link></li>
+                        <li><Link className="nav-link" to="/areas">Áreas</Link></li>
+                        <li><Link className="nav-link" to="/leituras">Leituras</Link></li>
+                        <li><Link className="nav-link" to="/usuario">Usuários</Link></li>
+                        <li><Link className="nav-link" to="/setor">Setores</Link></li>
                     </ul>
                     <ul className="navbar-nav navbar-collapse justify-content-end">
-                        {!isUserLoggedIn && <li><Link className="nav-link" to="/login">Login</Link></li>}
-                        {isUserLoggedIn && <li><Link className="nav-link" to="/logout" onClick={AuthenticationService.logout}>Logout</Link></li>}
+                        {!isUserLoggedIn && <li><Link className="nav-link" to="/login">Entrar</Link></li>}
+                        {isUserLoggedIn && <li><Link className="nav-link" to="/logout" onClick={AuthenticationService.logout}>Sair</Link></li>}
                     </ul>
                 </nav>
             </header>

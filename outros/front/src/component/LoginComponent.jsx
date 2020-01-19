@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, {Component} from 'react'
 import AuthenticationService from '../service/AuthenticationService';
 
 class LoginComponent extends Component {
@@ -7,7 +7,7 @@ class LoginComponent extends Component {
         super(props)
 
         this.state = {
-            username: 'admin',
+            username: 'admin@admin.com',
             password: '',
             hasLoginFailed: false,
             showSuccessMessage: false
@@ -20,8 +20,7 @@ class LoginComponent extends Component {
     handleChange(event) {
         this.setState(
             {
-                [event.target.name]
-                    : event.target.value
+                [event.target.name]: event.target.value
             }
         )
     }
@@ -43,11 +42,11 @@ class LoginComponent extends Component {
             .executeBasicAuthenticationService(this.state.username, this.state.password)
             .then(() => {
                 AuthenticationService.registerSuccessfulLogin(this.state.username, this.state.password)
-                this.props.history.push(`/courses`)
+                this.props.history.push('/areas')
             }).catch(() => {
-                this.setState({ showSuccessMessage: false })
-                this.setState({ hasLoginFailed: true })
-            })
+            this.setState({showSuccessMessage: false})
+            this.setState({hasLoginFailed: true})
+        })
 
         // AuthenticationService
         //     .executeJwtAuthenticationService(this.state.username, this.state.password)
@@ -64,15 +63,25 @@ class LoginComponent extends Component {
     render() {
         return (
             <div>
-                <h1>Login</h1>
-                <div className="container">
+                <h1 style={{textAlign: "center"}}>Login</h1>
+                <br/>
+                <div className="container" style={{textAlign: "center"}}>
                     {/*<ShowInvalidCredentials hasLoginFailed={this.state.hasLoginFailed}/>*/}
-                    {this.state.hasLoginFailed && <div className="alert alert-warning">Invalid Credentials</div>}
+                    {this.state.hasLoginFailed && <div className="alert alert-warning">Usuário ou Senha incorretos!</div>}
                     {this.state.showSuccessMessage && <div>Login Sucessful</div>}
                     {/*<ShowLoginSuccessMessage showSuccessMessage={this.state.showSuccessMessage}/>*/}
-                    User Name: <input type="text" name="username" value={this.state.username} onChange={this.handleChange} />
-                    Password: <input type="password" name="password" value={this.state.password} onChange={this.handleChange} />
-                    <button className="btn btn-success" onClick={this.loginClicked}>Login</button>
+                    <div>
+                        Usuário
+                        <br/>
+                        <input type="text" name="username" value={this.state.username} onChange={this.handleChange}/>
+                        <br/><br/>
+                        Senha
+                        <br/>
+                        <input type="password" name="password" value={this.state.password}
+                               onChange={this.handleChange}/>
+                        <br/><br/>
+                        <button className="btn btn-success" onClick={this.loginClicked}>Entrar</button>
+                    </div>
                 </div>
             </div>
         )

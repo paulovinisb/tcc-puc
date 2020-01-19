@@ -13,7 +13,9 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
+import java.util.Optional;
 
+@CrossOrigin(origins = {"http://localhost:3000"})
 @RestController
 public class InteressadoController {
 
@@ -27,6 +29,11 @@ public class InteressadoController {
     @Cacheable("interessados")
     public List<Interessado> getInteressadosByAreaId(@PathVariable Long areaId) {
         return interessadoRepository.findByAreaAreaId(areaId);
+    }
+
+    @GetMapping("/areas/{areaId}/interessados/{interessadoId}")
+    public Optional<Interessado> getInteressadosByAreaId(@PathVariable Long areaId, @PathVariable Long interessadoId) {
+        return interessadoRepository.findById(interessadoId);
     }
 
     @PostMapping("/areas/{areaId}/interessados")

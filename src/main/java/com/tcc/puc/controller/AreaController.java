@@ -5,13 +5,14 @@ import com.tcc.puc.model.Area;
 import com.tcc.puc.repository.AreaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
+import java.util.Optional;
 
+@CrossOrigin(origins = {"http://localhost:3000"})
 @RestController
 public class AreaController {
 
@@ -20,8 +21,13 @@ public class AreaController {
 
     @GetMapping("/areas")
     @Cacheable("areas")
-    public Page<Area> getAreas(Pageable pageable) {
-        return areaRepository.findAll(pageable);
+    public List<Area> getAreas() {
+        return areaRepository.findAll();
+    }
+
+    @GetMapping("/areas/{areaId}")
+    public Optional<Area> getArea(@PathVariable Long areaId) {
+        return areaRepository.findById(areaId);
     }
 
     @PostMapping("/areas")

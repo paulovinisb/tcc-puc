@@ -14,7 +14,9 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
+import java.util.Optional;
 
+@CrossOrigin(origins = {"http://localhost:3000"})
 @RestController
 public class SensorController {
 
@@ -28,6 +30,11 @@ public class SensorController {
     @Cacheable("sensors")
     public List<Sensor> getSensors(@PathVariable Long areaId) {
         return sensorRepository.findByAreaAreaId(areaId);
+    }
+
+    @GetMapping("/areas/{areaId}/sensors/{sensorId}")
+    public Optional<Sensor> getSensors(@PathVariable Long areaId, @PathVariable Long sensorId) {
+        return sensorRepository.findById(sensorId);
     }
 
     @PostMapping("/areas/{areaId}/sensors")

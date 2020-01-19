@@ -20,6 +20,7 @@ class AuthenticationService {
     }
 
     createBasicAuthToken(username, password) {
+        sessionStorage.setItem("BasicAuth", 'Basic ' + window.btoa(username + ":" + password))
         return 'Basic ' + window.btoa(username + ":" + password)
     }
 
@@ -42,6 +43,7 @@ class AuthenticationService {
 
     logout() {
         sessionStorage.removeItem(USER_NAME_SESSION_ATTRIBUTE_NAME);
+        sessionStorage.removeItem("BasicAuth");
     }
 
     isUserLoggedIn() {

@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.util.List;
 
+@CrossOrigin(origins = {"http://localhost:3000"})
 @RestController
 public class LeituraController {
 
@@ -27,6 +28,11 @@ public class LeituraController {
     @Cacheable("leituras")
     public List<Leitura> getLeituras(@PathVariable Long areaId, @PathVariable Long sensorId) {
         return leituraRepository.findBySensorSensorId(sensorId);
+    }
+
+    @GetMapping("/leituras")
+    public List<Leitura> getTodasLeituras() {
+        return leituraRepository.findAll();
     }
 
     @PostMapping("/areas/{areaId}/sensors/{sensorId}/leituras")
