@@ -19,6 +19,7 @@ import java.util.List;
 public class SpringBootFullStackBasicAuthLoginLogoutApplication {
 
     public static void main(String[] args) {
+        System.out.println("Jenkins");
         SpringApplication.run(SpringBootFullStackBasicAuthLoginLogoutApplication.class, args);
     }
 
